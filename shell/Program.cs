@@ -1,14 +1,30 @@
-﻿namespace shell;
+﻿using shell.Commands;
+using shell.Exceptions;
+
+namespace shell;
 
 class Program
 {
     static void Main()
     {
+        CommandRegistry.Setup();
+
         while (true)
         {
-            Console.Write("$ ");
-            var command = Console.ReadLine();
-            Console.WriteLine($"{command}: command not found");
+            try
+            {
+                Console.Write("$ ");
+                var input = Console.ReadLine();
+
+                if (CommandValidator.Validate(input, out var command, out var args))
+                {
+                    command.Execute(args);
+                }
+            }
+            catch (InvalidCommandException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
