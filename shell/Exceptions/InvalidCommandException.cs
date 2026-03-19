@@ -1,8 +1,8 @@
 ﻿namespace shell.Exceptions;
 
-public class InvalidCommandException : Exception
+public class InvalidCommandException : ShellException
 {
-    public InvalidCommandException(string? message) : base(message)
+    public InvalidCommandException(string commandName) : base($"{commandName}: command not found")
     {
         
     }
