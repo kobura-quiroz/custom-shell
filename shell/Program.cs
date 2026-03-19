@@ -21,7 +21,7 @@ class Program
                     command.Execute(args);
                 }
             }
-            catch (InvalidCommandException ex)
+            catch (ShellException ex)
             {
                 Console.WriteLine(ex.Message);
             }
